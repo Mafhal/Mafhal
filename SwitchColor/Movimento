@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MovimentoCirculos : MonoBehaviour
+{
+    public GameObject CirculoDireta, CirculoCentro, CirculoEsquerda;
+    private Sprite DireitaSprite, CentroSprite, EsquerdaSprite;
+
+    void Start(){
+        DireitaSprite = CirculoDireta.GetComponent<SpriteRenderer>().sprite;
+        CentroSprite = CirculoCentro.GetComponent<SpriteRenderer>().sprite;
+        EsquerdaSprite = CirculoEsquerda.GetComponent<SpriteRenderer>().sprite;
+        
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftArrow)){
+
+            CirculoEsquerda.GetComponent<SpriteRenderer>().sprite = CentroSprite;
+            CirculoCentro.GetComponent<SpriteRenderer>().sprite = EsquerdaSprite;
+
+            EsquerdaSprite = CirculoEsquerda.GetComponent<SpriteRenderer>().sprite;
+            CentroSprite = CirculoCentro.GetComponent<SpriteRenderer>().sprite;
+
+        }
+
+        if(Input.GetKeyDown(KeyCode.RightArrow)){
+
+            CirculoDireta.GetComponent<SpriteRenderer>().sprite = CentroSprite;
+            CirculoCentro.GetComponent<SpriteRenderer>().sprite = DireitaSprite;
+            
+            DireitaSprite = CirculoDireta.GetComponent<SpriteRenderer>().sprite;
+            CentroSprite = CirculoCentro.GetComponent<SpriteRenderer>().sprite;
+            
+        }
+        
+    }
+}
