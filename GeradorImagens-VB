@@ -1,0 +1,32 @@
+Public Class Form1
+
+    Dim bitMap(50) As Bitmap
+    Dim Imagens(50) As Image
+    Dim Padrao As Image
+
+    Private Sub BtnAbrir_Click(sender As Object, e As EventArgs) Handles BtnAbrir.Click
+
+        OpenFile.Filter = "(*.jpg;*.csv)|*.jpg;*.csv|" & "(*.png;*.csv)|*.png;*.csv|" & "All files (*.*)|*.*"
+        OpenFile.ShowDialog()
+
+        Dim Contador As String = 1
+
+        For Each File As String In OpenFile.FileNames
+
+            Padrao = Image.FromFile("C:\Users\Matheus\Desktop\Mafhal Midia\Setores\HotBinaurais\ConteudoFixo\Fundo.png")
+            Imagens(Contador) = New Bitmap(File)
+
+            bitMap(Contador) = New Bitmap(1280, 720)
+            Dim Graficos As Graphics = Graphics.FromImage(bitMap(Contador))
+
+
+            Graficos.DrawImage(Imagens(Contador), New Rectangle(0, 0, 1280, 720))
+            Graficos.DrawImage(Padrao, New Rectangle(0, 0, 1280, 720))
+
+            bitMap(Contador).Save("C:\Users\Matheus\Desktop\Arquivo" + Contador + ".jpg")
+
+            Contador += 1
+        Next
+
+    End Sub
+End Class
